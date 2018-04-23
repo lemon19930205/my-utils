@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>ztreeDemo</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="../../css/zTreeStyle/zTreeStyle.css" type="text/css">
+    <script type="text/javascript" src="../../js/jquery-1.4.4.min.js"></script>
+    <script type="text/javascript" src="../../js/jquery.ztree.core.js"></script>
+    <script type="text/javascript" src="../../js/jquery.ztree.excheck.js"></script>
+    <script type="text/javascript" src="../../js/jquery.ztree.exedit.js"></script>
+</head>
+
+<body>
+
+    <div class="tool">
+        <button id="add">新增</button>
+        <button id="updata">编辑</button>
+        <button id="remove">删除</button>
+        <button id="set">保存</button>
+    </div>
+    <div>
+        <ul id="treeDemo" class="ztree"></ul>
+    </div>
+    <div class="tool">
+        <button id="click1">click1</button>
+        <button id="click2">click2</button>
+        <button id="click3">click3</button>
+    </div>
+    <script type="text/javascript">
+        var zTreeObj;
+        // zTree 的参数配置，深入使用请参考 API 文档（setting 配置详解）
+        var setting = {
+            check: {
+                enable: true, //显示勾选框
+                autoCheckTrigger: true, //勾选操作关联关联事件
+                //勾选不关联父级，关联子级
+                chkboxType: {
+                    "Y": "s",
+                    "N": "s"
+                },
+            },
+            callback: {
+
+                //beforeEditName: zTreeBeforeEditName,//点击编辑按钮触发事件
+            },
+            edit: {
+                enable: true, //节点是否可编辑
+                drag: {
+                    isCopy: true, //拖拽复制  ctrl/cmd+拖拽
+                    isMove: true, //拖拽移动  拖拽
+                },
+                showRenameBtn: false, //是否在节点显示编辑按钮
+                showRemoveBtn: false, //是否显示删除按钮
+                removeTitle: "删除节点及其所有子节点", //鼠标移上删除按钮提示信息
+            }
+        };
+        // zTree 的数据属性，深入使用请参考 API 文档（zTreeNode 节点数据详解）
+        var zNodes = [{
+                name: "test1",
+                open: true,
+                children: [{
+                    name: "test1_1"
+                }, {
+                    name: "test1_2"
+                }]
+            },
+            {
+                name: "test2",
+                open: true,
+                children: [{
+                    name: "test2_1"
+                }, {
+                    name: "test2_2"
+                }]
+            }
+        ];
+        var zNodes2 = [{
+                name: "test1222",
+                open: true,
+                children: [{
+                    name: "test1_1"
+                }, {
+                    name: "test1_2"
+                }]
+            },
+            {
+                name: "test2",
+                open: true,
+                children: [{
+                    name: "test2_1"
+                }, {
+                    name: "test2_2"
+                }]
+            }
+        ];
+
+        $(document).ready(function () {
+            zTreeObj = $.fn.zTree.init($("#treeDemo"), setting, zNodes);
+
+
+        });
+
+        //选中事件  treeNode选中节点数据
+        function zTreeOnClick(event, treeId, treeNode) {
+            console.log(event, treeId, treeNode);
+        };
+        //编辑事件
+        function zTreeBeforeEditName(treeId, treeNode) {
+            console.log(treeId, treeNode);
+            //此处可以加弹窗编辑逻辑
+            return false //返回false则不进入节点名编辑模式
+        }
+
+        $('#click1').click(function () {
+            var data;
+            //获取当前全部节点
+            //data = zTreeObj.getNodes();
+
+            //获取当前选中节点
+            //data = zTreeObj.getSelectedNodes();
+
+            //获取勾选/非勾选节点集合  true勾选项/false未勾选项
+            //data = zTreeObj.getCheckedNodes(true);
+
+            //勾选选中节点
+            /* var nodes = zTreeObj.getSelectedNodes();
+            for (var i = 0, l = nodes.length; i < l; i++) {
+                //勾选操作，必须是源数据中的数据对象
+                zTreeObj.checkNode(nodes[i], true, true);
+            }; */
+            console.log(data);
+        });
+
+        //更新数据，重新实例化
+        function update_tree() {
+            //获取新的最新数据
+            /* $.ajax({
+                type: "method",
+                url: "url",
+                data: "data",
+                dataType: "dataType",
+                success: function (response) {
+                    zTreeObj = $.fn.zTree.init($("#treeDemo"), setting, newData);
+                }
+            }); */
+        };
+
+        //新增
+        $('#add').click(function (param) {
+            //获取当前选中节点
+            var data = zTreeObj.getSelectedNodes();
+            console.log(data);
+            if (data) {
+                /* $.ajax({
+                    type: "method",
+                    url: "url",
+                    data: "data",
+                    dataType: "dataType",
+                    success: function (response) {
+                        if (response.status === 0) {
+                            update_tree()
+                        }
+                    }
+                }); */
+            }
+        });
+
+        //编辑
+        $('#updata').click(function (param) {
+            //获取当前选中节点
+            var data = zTreeObj.getSelectedNodes();
+            //console.log(data);
+            if (data.length>0) {
+                //弹框
+                console.log(data);
+                /* $.ajax({
+                    type: "method",
+                    url: "url",
+                    data: "data",
+                    dataType: "dataType",
+                    success: function (response) {
+                        if (response.status === 0) {
+                            update_tree()
+                        }
+                    }
+                }); */
+            }
+        });
+
+        //删除
+        $('#remove').click(function (param) {
+            //获取当前选中节点
+            var data = zTreeObj.getSelectedNodes();
+            console.log(data);
+            if (data) {
+                /* $.ajax({
+                    type: "method",
+                    url: "url",
+                    data: "data",
+                    dataType: "dataType",
+                    success: function (response) {
+                        if (response.status === 0) {
+                            update_tree()
+                        }
+                    }
+                }); */
+            }
+        });
+
+        //保存
+        $('#set').click(function (param) {
+            //获取当前全部节点
+            var data = zTreeObj.getNodes();
+            console.log(data);
+            if (data) {
+                /* $.ajax({
+                    type: "method",
+                    url: "url",
+                    data: "data",
+                    dataType: "dataType",
+                    success: function (response) {
+                        if (response.status === 0) {
+                            update_tree()
+                        }
+                    }
+                }); */
+            }
+        });
+    </script>
+</body>
+
+</html>

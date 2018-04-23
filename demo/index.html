@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>demo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <script src="../modules/jquery-3.2.1.js"></script>
+</head>
+
+<body>
+  <input type="text" id="inp">
+</body>
+<script>
+  //map中，键值key不能用变量？
+  var ary = [{
+      name: 1,
+      value: '正常'
+    },
+    {
+      name: 0,
+      value: '禁用'
+    },
+    {
+      name: 2,
+      value: '未知错误'
+    },
+  ];
+  var data = $.map(ary, function (val, key) {
+    var obj = {};
+    obj[val.name] = val.value;
+    return obj
+  });
+  //正则校验整数/小数
+  $('#inp').on('keyup', function (param) {
+    var val = $(this).val();
+    //var s = /^(\d|[1-9]\d+)$|^(\d|[1-9]\d+\.\d{1,2})$/.test(val);
+    var s = /^(\d|[1-9]\d+)($|\.\d{1,2}$)/.test(val);
+    console.log(val, s);
+  });
+</script>
+
+</html>
