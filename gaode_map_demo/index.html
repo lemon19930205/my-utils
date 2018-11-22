@@ -64,14 +64,13 @@
     //保存所有覆盖物
     $("#sub").on("click", function (e) {
       var overlaysList = map.getAllOverlays('polygon');
-      var data = [];
-      data = overlaysList.map(function (item, key) {
-        return item.B.path
+      all_data = overlaysList.map(function (item, key) {
+        return item.getPath()
       });
       for (let i = 0; i < overlaysList.length; i++) {
-        const a_path = overlaysList[i].B.path;
+        const a_path = overlaysList[i].getPath();
         for (let j = 0; j < i; j++) {
-          const b_path = overlaysList[j].B.path;
+          const b_path = overlaysList[j].getPath();
           var flag = computePath(a_path, b_path);
           if (flag) {
             overlaysList[i].setOptions({
@@ -86,7 +85,7 @@
         }
       }
       overlaysList.forEach(function (item, key) {
-        var a_path = item.B.path;
+        var a_path = item.getPath();
 
       })
       //console.log(data);
@@ -97,7 +96,7 @@
     })
     //复现覆盖物
     $("#set").on("click", function (e) {
-      data.forEach(function (item, key) {
+      all_data.forEach(function (item, key) {
         var name = 'polygon_' + key;
         new AMap.Polygon({
           extData: {
@@ -127,13 +126,13 @@
     //绘制完成事件
     mouseTool.on('draw', function (e) {
       var tp = e.obj.CLASS_NAME;
-      var position = e.obj.B.position;
+      var position = e.obj.getPath();
       console.log(e);
       if (tp == "AMap.Marker") {
         //点
         var overlaysList = map.getAllOverlays('polygon');
         var flag = overlaysList.some(function (item, index) {
-          return computeMarker(position, item.B.path);
+          return computeMarker(position, item.getPath());
         })
         if (!flag) {
           if(confirm("该点不在配送区域内")){
