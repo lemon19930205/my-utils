@@ -1,1 +1,0 @@
-const random = (arr, num) => arr.sort(() => Math.random() - 0.5).splice(0, num);
