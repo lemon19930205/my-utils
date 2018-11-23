@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Page Title</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <style type="text/css">
+    * {
+      margin: 0px;
+      padding: 0px;
+    }
+
+    #table1 table {
+      width: 500px;
+      display: block;
+    }
+
+    #table1 table tbody {
+      display: block;
+      height: 195px;
+      overflow-y: scroll;
+    }
+
+    #table1 table thead,
+    #table1 tbody tr {
+      display: table;
+      width: 100%;
+      table-layout: fixed;
+    }
+
+    #table1 table thead {
+      width: calc(100% - 1em)
+    }
+
+    #table1 thead tr th,
+    #table1 tbody tr td {
+      width: 200px;
+    }
+
+
+
+
+    .sq {
+      width: 70%;
+      height: 100px;
+      overflow: auto;
+      margin: auto;
+    }
+
+    .tt {
+      margin: auto;
+      border-collapse: collapse;
+      border-spacing: 0;
+    }
+
+    .tt thead tr {
+      z-index: 2;
+    }
+
+    table {
+      border-collapse: collapse;
+      border-spacing: 0;
+    }
+
+    .sh {
+      width: 70%;
+      margin: auto;
+    }
+  </style>
+</head>
+<div id="table1">
+  <table border="1">
+    <thead>
+      <tr>
+        <th>姓名</th>
+        <th>年龄</th>
+        <th>出生年月</th>
+        <th>手机号码</th>
+        <th>单位</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>张三</td>
+        <td>18</td>
+        <td>1990-9-9</td>
+        <td>13682299090</td>
+        <td>阿里巴巴</td>
+      </tr>
+      <tr>
+        <td>张三封</td>
+        <td>18</td>
+        <td>1990-9-9</td>
+        <td>13682299090</td>
+        <td>阿里巴巴与四十大盗</td>
+      </tr>
+      <tr>
+        <td>张小三</td>
+        <td>18</td>
+        <td>1990-9-9</td>
+        <td>13682299090</td>
+        <td>腾讯科技</td>
+      </tr>
+      <tr>
+        <td>张三</td>
+        <td>18</td>
+        <td>1990-9-9</td>
+        <td>13682299090</td>
+        <td>浏阳河就业</td>
+      </tr>
+      <tr>
+        <td>张三疯子</td>
+        <td>18</td>
+        <td>1990-9-9</td>
+        <td>13682299090</td>
+        <td>阿里巴巴</td>
+      </tr>
+      <tr>
+        <td>张三</td>
+        <td>18</td>
+        <td>1990-9-9</td>
+        <td>13682299090</td>
+        <td>阿里巴巴</td>
+      </tr>
+      <tr>
+        <td>张大三</td>
+        <td>18</td>
+        <td>1990-9-9</td>
+        <td>13682299090</td>
+        <td>阿里巴巴</td>
+      </tr>
+      <tr>
+        <td>张三五</td>
+        <td>18</td>
+        <td>1990-9-9</td>
+        <td>13682299090</td>
+        <td>阿里巴巴</td>
+      </tr>
+      <tr>
+        <td>张刘三</td>
+        <td>18</td>
+        <td>1990-9-9</td>
+        <td>13682299090</td>
+        <td>阿里巴巴</td>
+      </tr>
+      <tr>
+        <td>张三</td>
+        <td>18</td>
+        <td>1990-9-9</td>
+        <td>13682299090</td>
+        <td>阿里巴巴</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<div id="table2">
+  <div class="sh">
+    <table border="1px" class="ts">
+      <thead>
+        <tr>
+          <th>第一列</th>
+          <th>第二列</th>
+        </tr>
+      </thead>
+    </table>
+  </div>
+  <div class="sq">
+    <table width="100%" class="tt" border="1px" height="50px">
+      <tbody>
+        <tr>
+          <td width="50%">123</td>
+          <td width="50%">123</td>
+        </tr>
+        <tr>
+          <td>123</td>
+          <td>123</td>
+        </tr>
+        <tr>
+          <td>123</td>
+          <td>123</td>
+        </tr>
+        <tr>
+          <td>123</td>
+          <td>123</td>
+        </tr>
+        <tr>
+          <td>123</td>
+          <td>123</td>
+        </tr>
+        <tr>
+          <td>123</td>
+          <td>123</td>
+        </tr>
+        <tr>
+          <td>123</td>
+          <td>123</td>
+        </tr>
+        <tr>
+          <td>123</td>
+          <td>123</td>
+        </tr>
+        <tr>
+          <td>123</td>
+          <td>123</td>
+        </tr>
+        <tr>
+          <td>123</td>
+          <td>123</td>
+        </tr>
+        <tr>
+          <td>123</td>
+          <td>123</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+
+<body>
+  <script src="jquery-3.2.1.min.js"></script>
+  <script type="text/javascript">
+    //table2
+    //这是关键，改变表格的宽度
+    function t() {
+      var sw = $(".sq")[0].offsetWidth - $(".sq")[0].scrollWidth;
+      var tsw = $(".sh")[0].offsetWidth;
+      var s = tsw - sw;
+      $(".ts").css({
+        "width": s
+      })
+      console.log(s);
+    }
+    setInterval("t()", 50);
+  </script>
+</body>
+
+</html>
