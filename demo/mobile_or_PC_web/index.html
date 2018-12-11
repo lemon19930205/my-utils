@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Page Title</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="/bootstrap-3.3.7/dist/css/bootstrap.css">
+  <link rel="stylesheet" href="./index.css">
+</head>
+
+<body>
+
+  <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
+    <a class="navbar-brand" href="#">快捷搜索</a>
+    <div class="navbar-form">
+      <div class="input-group">
+        <div class="input-group-btn">
+          <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true"
+            aria-expanded="false">Action <span class="caret"></span></button>
+          <ul class="dropdown-menu">
+            <li><a href="#">Action</a></li>
+            <li><a href="#">Another action</a></li>
+            <li><a href="#">Something else here</a></li>
+            <li role="separator" class="divider"></li>
+            <li><a href="#">Separated link</a></li>
+          </ul>
+        </div>
+        <input type="text" class="form-control" placeholder="Amount">
+      </div>
+      <button class="btn btn-default">Submit</button>
+    </div>
+  </nav>
+  <div class="content">
+    <div id="mobile" class="view_box">
+      <iframe id="mobile_view" src="http://www.baidu.com" frameborder="0"></iframe>
+    </div>
+
+    <div id="PC" class="view_box">
+        <iframe id="PC_view" src="http://127.0.0.1:9999/demo/mobile_or_PC_web/PC_view.html" frameborder="0"></iframe>
+      </div>
+  </div>
+
+
+  <script src="./jquery-3.2.1.min.js"></script>
+  <script src="/bootstrap-3.3.7/dist/js/bootstrap.js"></script>
+  <script src="./index.js"></script>
+</body>
+
+</html>
