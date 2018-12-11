@@ -18,18 +18,22 @@
       <div class="input-group">
         <div class="input-group-btn">
           <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true"
-            aria-expanded="false">Action <span class="caret"></span></button>
+            aria-expanded="false">百度  <span class="caret"></span></button>
           <ul class="dropdown-menu">
-            <li><a href="#">Action</a></li>
-            <li><a href="#">Another action</a></li>
-            <li><a href="#">Something else here</a></li>
-            <li role="separator" class="divider"></li>
-            <li><a href="#">Separated link</a></li>
+            <li><a href="#">百度</a></li>
+            <li><a href="#">Google</a></li>
+            <li><a href="#">搜狗</a></li>
+            <li><a href="#">必应</a></li>
           </ul>
         </div>
-        <input type="text" class="form-control" placeholder="Amount">
+        <input type="text" class="form-control" placeholder="请输入搜索内容" id="searchInput">
+        <div class="search_list">
+          <ul id="searchData">
+
+          </ul>
+        </div>
       </div>
-      <button class="btn btn-default">Submit</button>
+      <button class="btn btn-default" id="searchButton">搜索</button>
     </div>
   </nav>
   <div class="content">
