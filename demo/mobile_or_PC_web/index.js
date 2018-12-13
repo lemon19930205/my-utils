@@ -1,10 +1,20 @@
 //百度模糊搜索提示
-$("#searchInput").on("keyup", function (e) {
+$("#searchInput").on("focus", function (e) {
+  searchMsg();
+}).on("keyup", function (e) {
+  searchMsg();
+}).on("blur", function (e) {
+  setTimeout(() => {
+    $("#searchData").hide();
+  }, 500);
+})
+
+function searchMsg(e) {
   $.ajax({
     type: "get",
     url: "https://sp0.baidu.com/5a1Fazu8AA54nxGko9WTAnF6hhy/su",
     data: {
-      wd: $(this).val(),
+      wd: $("#searchInput").val(),
       cb: "helloword"
     },
     dataType: "jsonp",
@@ -28,7 +38,7 @@ $("#searchInput").on("keyup", function (e) {
       console.log("error");
     }
   });
-})
+}
 
 function helloword(param) {
   console.log(param);
@@ -55,6 +65,6 @@ function searchFun(param) {
   $("#mobile_view").attr("src", url);
 
   //右侧PC页
-  $("#PC").html('<iframe id="PC_view" src="http://127.0.0.1:9999/demo/mobile_or_PC_web/PC_view.html?wd='+encodeURI($("#searchInput").val())+'" frameborder="0"></iframe>')
+  $("#PC").html('<iframe id="PC_view" src="http://127.0.0.1:9999/demo/mobile_or_PC_web/PC_view.html?wd=' + encodeURI($("#searchInput").val()) + '" frameborder="0"></iframe>')
 
 }

@@ -6,10 +6,13 @@ ul,
 li {
   list-style: none;
 }
+.search_input {
+  width: 300px !important;
+}
 .search_list {
   position: absolute;
   top: 34px;
-  width: 196px;
+  width: 300px;
   background-color: #fff;
 }
 .search_list ul {
