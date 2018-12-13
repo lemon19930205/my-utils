@@ -11,15 +11,19 @@ li {
   top: 34px;
   width: 196px;
   background-color: #fff;
-  border: 1px solid #e7e7e7;
 }
 .search_list ul {
+  border: 1px solid #e7e7e7;
   margin-bottom: 0;
 }
 .search_list ul li {
   padding: 6px 12px;
   height: 34px;
-  line-height: 34px;
+  line-height: 22px;
+  cursor: default;
+}
+.search_list ul li:hover {
+  background-color: #f0f0f0;
 }
 .content {
   position: absolute;

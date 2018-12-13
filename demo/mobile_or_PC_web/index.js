@@ -13,13 +13,15 @@ $("#searchInput").on("keyup", function (e) {
       /*返回成功之后可以在开发者工具里的Console打印看一下*/
       console.log(result);
       /*将获取的数据整理后返回到页面*/
-      var a = result.s;
-      var list = "";
-      for (var i in a) {
-        var l = a[i];
-        list += "<li>" + l + "</li>";
+      if (result) {
+        var a = result.s;
+        var list = "";
+        for (var i in a) {
+          var l = a[i];
+          list += "<li>" + l + "</li>";
+        }
+        $("#searchData").show().html(list);
       }
-      $("#searchData").html(list);
     },
     /*跨域失败的时候返回的数据*/
     error: function () {
@@ -29,8 +31,30 @@ $("#searchInput").on("keyup", function (e) {
 })
 
 function helloword(param) {
-console.log(param);
-
+  console.log(param);
 }
 
-//s
+//模糊搜索选中
+$("#searchData").on("click", function (e) {
+  var ele = $(e.target);
+  if (ele.is('li')) {
+    $("#searchInput").val(ele.text());
+    $(this).hide();
+    searchFun();
+  }
+})
+
+//搜索事件
+$("#searchButton").on("click", function (e) {
+  searchFun();
+})
+
+function searchFun(param) {
+  //左侧mobile页
+  var url = "https://www.baidu.com/s?wd=" + $("#searchInput").val();
+  $("#mobile_view").attr("src", url);
+
+  //右侧PC页
+  $("#PC").html('<iframe id="PC_view" src="http://127.0.0.1:9999/demo/mobile_or_PC_web/PC_view.html?wd='+encodeURI($("#searchInput").val())+'" frameborder="0"></iframe>')
+
+}
