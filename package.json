@@ -17,7 +17,7 @@
   },
   "homepage": "https://github.com/lemon19930205/my-utils#readme",
   "dependencies": {
-    "express": "^4.16.3",
+    "express": "^4.16.4",
     "jquery": "^3.3.1",
     "ztree": "^3.5.24"
   }
