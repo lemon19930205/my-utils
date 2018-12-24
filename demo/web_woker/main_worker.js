@@ -3,17 +3,27 @@ var worker = new Worker("child_worker.js");
 
 //主线程向子线程发消息
 $("#send").on("click", function (e) {
-  //worker.postMessage("Hello World");
+  //普通数据
+  /* worker.postMessage("Hello World"); */
 
+  //对象数据
   /* worker.postMessage({
     method: 'echo',
     args: ['work']
   }); */
 
-  worker.postMessage({
+  /* worker.postMessage({
     method: "js",
     fileName: "script_data.js"
-  });
+  }); */
+
+  //引用数据
+  var uInt8Arrary = new Uint8Array(new ArrayBuffer(10));
+  console.log('uInt8Arrary: ', uInt8Arrary);
+  for (let i = 0; i < uInt8Arrary.length; i++) {
+    uInt8Arrary[i] = i * 2;
+  }
+  worker.postMessage(uInt8Arrary)
 })
 
 //监听子线程发回的消息
@@ -26,8 +36,8 @@ worker.onmessage = function (e) {
 
 //监听子线程是否发生错误
 worker.onerror = function (e) {
-  console.log(["error:line",e.lineno,"in",e.filename,",",e.message].join(''));
-  
+  console.log(["error:line", e.lineno, "in", e.filename, ",", e.message].join(''));
+
 }
 
 function doSomething() {
