@@ -14,5 +14,11 @@
   </span>
   <script src="/modules/jquery-3.2.1.min.js"></script>
   <script src="main_worker.js"></script>
+  <script id="worker2" type="app/worker">
+    //同页面的web worker
+    addEventListener("message",function(e){
+      postMessage("some message");
+    },false)
+  </script>
 </body>
 </html>
