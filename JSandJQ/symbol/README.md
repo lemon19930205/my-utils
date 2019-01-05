@@ -83,3 +83,130 @@
     Number(sym) // TypeError
     sym + 2 // TypeError
    ```
+
+## 作为属性名的 Symbol
+
+- 利用Symbol的值都是不相等的特性,使其可以作为标识符,用于对象属性名.(防止出现相同的,或被改写和覆盖)
+
+   ```javascript
+    let mySymbol = Symbol();
+
+    // 第一种写法
+    let a = {};
+    a[mySymbol] = 'Hello!';
+
+    // 第二种写法
+    let a = {
+    [mySymbol]: 'Hello!'
+    };
+
+    // 第三种写法
+    let a = {};
+    Object.defineProperty(a, mySymbol, { value: 'Hello!' });
+
+    // 以上写法都得到同样结果
+    a[mySymbol] // "Hello!"
+   ```
+
+- 注:Symbol值作为对象属性名时,不能用点运算符(点运算符后的属性名是字符串,非变量或Symbol值).Symbol值定一属性时,Symbol值必须放在方括号中.
+
+   ```javascript
+    const mySymbol = Symbol();
+    const a = {};
+
+    a.mySymbol = 'Hello!';
+    a[mySymbol] // undefined
+    a['mySymbol'] // "Hello!"
+
+
+    let s = Symbol();
+
+    let obj = {
+      [s]: function (arg) { ... }
+    };
+
+    obj[s](123);
+
+
+    let obj = {
+      [s](arg) { ... }
+    };
+   ```
+
+- 用于定义常量(因其任何值都不可能相同,就可以保证switch语句正常执行)
+
+   ```javascript
+    const log = {};
+
+    log.levels = {
+      DEBUG: Symbol('debug'),
+      INFO: Symbol('info'),
+      WARN: Symbol('warn')
+    };
+    console.log(log.levels.DEBUG, 'debug message');
+    console.log(log.levels.INFO, 'info message');
+
+
+    const COLOR_RED    = Symbol();
+    const COLOR_GREEN  = Symbol();
+
+    function getComplement(color) {
+      switch (color) {
+        case COLOR_RED:
+          return COLOR_GREEN;
+        case COLOR_GREEN:
+          return COLOR_RED;
+        default:
+          throw new Error('Undefined color');
+        }
+    }
+   ```
+
+- Symbol作为属性名时是公开属性,不是私有属性
+
+## 实例:消除魔术字符串
+
+- 魔术字符串:在代码中多次出现、与代码形成强耦合的某一个具体的字符串或者数值(应该尽量消除魔术字符串,改由含义清晰的变量代替)
+
+   ```javascript
+    function getArea(shape, options) {
+      let area = 0;
+
+      switch (shape) {
+        case 'Triangle': // 魔术字符串
+          area = .5 * options.width * options.height;
+          break;
+        /* ... more code ... */
+      }
+
+      return area;
+    }
+
+    getArea('Triangle', { width: 100, height: 100 }); // 魔术字符串
+
+
+    const shapeType = {
+      triangle: 'Triangle'
+    };
+
+    function getArea(shape, options) {
+      let area = 0;
+      switch (shape) {
+        case shapeType.triangle:
+          area = .5 * options.width * options.height;
+          break;
+      }
+      return area;
+    }
+
+    getArea(shapeType.triangle, { width: 100, height: 100 });
+
+
+    const shapeType = {
+      triangle: Symbol()
+    };
+   ```
+
+## 属性名的遍历
+
+- Symbol作为属性名,不会出现在for...in、for...of循环中,也不会被Object.keys()、Object.getOwnPropertyNames()、JSON.stringify()返回.但它也不是私有属性,可以通过Object.getOwnPropertySymbols方法获取所有Symbol属性名.
