@@ -1,0 +1,45 @@
+{
+  "manifest_version": 2,
+  "name": "zhou",
+  "version": "1.0.0",
+  "description": "Chrome_demo",
+  "icons": {
+    "16": "img/dog_logo.png",
+    "48": "img/dog_logo.png",
+    "128": "img/dog_logo.png"
+  },
+  "background": {
+    "page": "background.html"
+  },
+  "browser_action": {
+    "default_icon": "img/dog_logo.png",
+    "default_title": "shili_zhou",
+    "default_popup": "popup.html"
+  },
+  "content_scripts": [{
+    "matches": ["https://www.baidu.com/"],
+    "js": ["js/jquery-3.2.1.js"],
+    "css": ["css/custom.css"],
+    "run_at": "document_start"
+  }],
+  "permissions": [
+    "contextMenus",
+    "tabs",
+    "notifications",
+    "webRequest",
+    "webRequestBlocking",
+    "storage"
+  ],
+  "web_accessible_resourcee": ["js/inject.js"],
+  "homepage_url": "https://www.baidu.com",
+  "chrome_url_overrides": {
+    "newtab": "newtab.html"
+  },
+  "options_page": "options.html",
+  "options_ui": {
+    "page": "options.html",
+    "chrome_style": true
+  },
+  "omnibox":{"keyword":"go"},
+  "devtools_page":"devtools.html"
+}
