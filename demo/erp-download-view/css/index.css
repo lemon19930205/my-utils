@@ -1,0 +1,126 @@
+html {
+  color: #000;
+  font-family: PingFangSC-Regular;
+}
+.checkbox {
+  margin: 0;
+  padding: 0;
+  flex: 1;
+  width: 4rem;
+}
+.checkbox label {
+  padding: 0 0.35rem 0 0.48rem;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.checkbox label::before,
+.checkbox label::after {
+  top: 50%;
+  margin-top: -0.17rem;
+  margin-left: 0;
+  width: 0.34rem;
+  height: 0.34rem;
+  background: #ffffff;
+  border-radius: 2px;
+  border: 1px solid #979797;
+  outline: none !important;
+}
+.checkbox label::after {
+  /* width: 17px;
+    height: 17px;
+    padding-left: 2px;
+    padding-top: 0; */
+}
+.checkbox label::after {
+  color: #FFFFFF;
+  background: #2DB7F5;
+  border: none;
+}
+.header {
+  padding: .36rem .36rem 0;
+}
+.header .logo {
+  display: inline-block;
+  width: 2.24rem;
+  height: 0.64rem;
+  vertical-align: bottom;
+}
+.header .title {
+  display: inline-block;
+  width: 1.8rem;
+  height: .42rem;
+  line-height: .42rem;
+  font-size: 15px;
+  font-weight: 400;
+}
+.content .panel-default .panel-title {
+  margin: 0.5rem 0.36rem 0.3rem;
+}
+.content .panel-default .panel-title .title-icon {
+  float: left;
+  margin-top: 0.06rem;
+  content: "";
+  display: block;
+  width: 0.06rem;
+  height: 0.32rem;
+  background: linear-gradient(360deg, #383d41 0%, #94969d 100%);
+  border-radius: 2px;
+}
+.content .panel-default .panel-title .title-con {
+  margin-left: 0.12rem;
+  height: 0.45rem;
+  line-height: 0.45rem;
+  font-size: 15px;
+  font-weight: 600;
+}
+.content .panel-default .panel-body {
+  padding: 0;
+}
+.content .panel-default .panel-body .list-group {
+  margin: 0;
+}
+.content .panel-default .panel-body .list-group .list-group-item {
+  padding: 0 0.36rem;
+  margin-bottom: 0.2rem;
+  display: flex;
+  width: 100%;
+  height: 1.14rem;
+  line-height: 1.14rem;
+  background: #f8f8f8;
+  border: none;
+}
+.content .panel-default .panel-body .list-group .list-group-item .download-item {
+  width: 1.8rem;
+  color: #2db7f5;
+}
+.content .panel-default .panel-body .list-group .list-group-item:last-child {
+  margin-bottom: 0;
+}
+.footer {
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  padding: 0 0.36rem;
+  width: 100%;
+  height: 1.4rem;
+  line-height: 1.4rem;
+  display: flex;
+  box-sizing: border-box;
+  box-shadow: 0px 0px 10px 10px #f6f7f7;
+}
+.footer .btn {
+  margin: 0.3rem 0;
+  width: 2.4rem;
+  height: 0.8rem;
+  background: #ccc;
+  border-radius: 4px;
+  color: #FFFFFF;
+  font-size: 15px;
+}
+.footer .btn:focus {
+  outline: none;
+}
+.footer .btn-enabled {
+  background: #2DB7F5;
+}
