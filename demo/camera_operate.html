@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>demo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+
+<body>
+  <!-- 人脸识别demo -->
+  <div style="padding: 20px">
+    <button id="openCamera" class="btn btn-white btn-default btn-round"><i class="glyphicon glyphicon-camera"></i>开启摄像头</button>
+    <button id="registerFace" class="btn btn-white btn-default btn-round"><i class="glyphicon glyphicon-user"></i>人脸录入</button>
+    <button id="clearFace" class="btn btn-white btn-default btn-round"><i class="glyphicon glyphicon-trash"></i>清除</button>
+    <div style="padding-top: 20px;position: relative;height: 250px">
+      <div class="faceBox"><video width="256" height="192" id="video"></video></div>
+      <canvas style="display:none" id="canvas" width="320" height="240"></canvas>
+      <div class="pic-face">
+        <img src="" alt="">
+      </div>
+    </div>
+  </div>
+
+  <script src="../modules/jquery-3.2.1.min.js"></script>
+  <script>
+    /* 人脸识别demo */
+    var videoWidth = 256;
+    var videoHeight = 192;
+    var canvans = document.getElementById("canvas");
+    var context = canvans.getContext("2d");
+    var video = document.getElementById("video");
+    $('#openCamera').on('click', function () {
+      openCamera(video);
+      $(".pic-face").hide(); //隐藏图片
+    });
+    $('#registerFace').on('click', function () {
+      var img = saveCameraShot(canvans,video,videoWidth, videoHeight);
+      console.log('img: ', img);
+    });
+    $('#clearFace').on('click', function () {
+
+    });
+    //人脸登录
+    function openCamera(video) { // 获取媒体方法（旧方法）
+      navigator.getMedia = navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMeddia ||
+        navigator.msGetUserMedia;
+      // 获取媒体方法（新方法）
+      // 使用新方法打开摄像头
+      if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
+        navigator.mediaDevices.getUserMedia({
+          video: true,
+          audio: false
+        }).then(function (stream) {
+          video.src = (window.URL || window.webkitURL).createObjectURL(stream);
+          video.play();
+        }).catch(function (err) {
+          alert('打开摄像头失败,请检查设备和驱动正常');
+          console.log(err);
+        })
+      } else if (navigator.getMedia) { // 使用旧方法打开摄像头
+        navigator.getMedia({
+          video: true
+        }, function (stream) {
+          video.src = (window.URL || window.webkitURL).createObjectURL(stream);
+          video.play();
+        }, function (err) {
+          alert('打开摄像头失败,请检查设备和驱动正常');
+          console.log(err);
+        });
+      }
+    }
+
+    function saveCameraShot(canvans,video,videoWidth, videoHeight) {
+      var context = canvans.getContext("2d");
+      context.drawImage(video, 0, 0, videoWidth, videoHeight);
+      //获取浏览器页面的画布对象
+      //以下开始编 数据
+      var imgData = canvans.toDataURL();
+      //将图像转换为base64数据
+      var base64Data = imgData.substr(22);
+      return base64Data
+    }
+  </script>
+</body>
+
+</html>

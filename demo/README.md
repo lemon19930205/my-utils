@@ -10,3 +10,5 @@
 - ## 左右/上下自适应布局测试(cssLeftRight.html)
 - ## 事件机制测试(event_demo.html)
 - ## 正则校验(regex.html)
+- ## 密码强度校验(password_safety.html)
+- ## 人脸识别(camera_operate.html)
