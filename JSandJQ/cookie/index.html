@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>cookie示例</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+
+<body>
+
+  <button type="button" class="btn btn-large btn-block btn-default" id="save">保存</button>
+
+  <script src="/modules/jquery-3.2.1.js"></script>
+  <script src="/modules/jquery.cookie.js"></script>
+  <script>
+    $("#save").on("click", function () {
+      //$.cookie('the_cookie', '6666');
+      $.cookie('the_cookie', '6666',{ expires: 7 });
+    })
+  </script>
+</body>
+
+</html>
