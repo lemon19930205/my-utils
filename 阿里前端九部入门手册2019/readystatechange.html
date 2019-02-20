@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>监听动态加载的script</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+
+<body>
+  <input type="text" autofocus>
+  <input type="text" name="country_code" pattern="[A-z]{3}" title="Three letter country code" />
+  <script>
+    var script = document.createElement('script');
+    //测试document可以监听到，script监听不到
+    script.addEventListener('readystatechange', function eventListener(e) {
+      if (e.readyState === 'loaded' || e.readyState === 'complete') {
+        console.log('6666')
+        //不能解绑匿名函数
+        script.removeEventListener('readystatechange', eventListener)
+      }
+    });
+    script.src = '/modules/jquery-3.2.1.js'
+    document.body.appendChild(script);
+  </script>
+</body>
+
+</html>
