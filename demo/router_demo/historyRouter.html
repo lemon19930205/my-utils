@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<input type="text" name="a" id="input1">
+
+<button type="button" id="button1">跳转777</button>
+
+<body>
+  <script src="/modules/jquery-3.2.1.js"></script>
+  <script>
+    window.onpopstate = function () {
+      $("#input1").val('history' + window.location.href);
+      console.log(window, window.location.href);
+    }
+    $("#button1").on("click", function (e) {
+      let state = {
+        title: "title1",
+        url: "#"
+      }
+      window.history.pushState(state, "title", "#xx");
+    })
+  </script>
+</body>
+
+</html>
