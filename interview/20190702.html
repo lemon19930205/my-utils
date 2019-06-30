@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Page Title</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+<style>
+  * {
+    margin: 0;
+    padding: 0;
+  }
+
+  .box1 {
+    width: 500px;
+    height: 100px;
+    border: 1px solid #000;
+    box-sizing: border-box;
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .box1 div {
+    flex: 1;
+    width: 100px;
+  }
+
+  .child1 {
+    background: red;
+  }
+
+  .child2 {
+    background: yellow;
+  }
+
+  .child3 {
+    background: green;
+  }
+
+  .child4 {
+    background: blue;
+  }
+
+  .child5 {
+    background: purple;
+  }
+</style>
+
+<body>
+  <div class="box1">
+    <div class="child1">asdf asdf</div>
+    <div class="child2">sdfsdfasdfa</div>
+    <div class="child3">adfasdfasdfasdfasdfasdfasdfasdfasdf</div>
+    <div class="child4">asdfasdfasdfasdf</div>
+    <div class="child5">wetwetertertertertwert</div>
+  </div>
+  <script>
+    //1.用两个数组(栈)实现一个队列
+
+    //栈是后进先出，队列是先进先出
+    function fn1() {
+      var stackList1 = [],
+        stackList2 = [];
+      //队列中添加任务
+      function push(stack) {
+        stackList1.push(stack);
+      }
+      //执行队列任务
+      function pop() {
+        if (stackList2.length) {
+          stackList2.pop();
+        } else {
+          if (stackList1.length) {
+            for (let i = 0; i < stackList1.length; i++) {
+              stackList2.push(stackList1.pop());
+            }
+            return stackList2.pop();
+          } else {
+            return null;
+          }
+        }
+      }
+      //如果是一个数组实现队列
+
+      //添加任务
+      stackList1.push('stack');
+      //执行任务
+      stackList1.shift()
+      //或者反着
+      stackList1.unshift('stack');
+      stackList1.pop();
+    }
+
+    //2.flex实现一个平均分布局
+
+    //3.基础的算法
+
+    //4.基础的css
+
+    //5.es6相关
+    //5-1. async/await
+
+    //new 操作符都做了些什么
+    function _new() {
+      let obj = {};
+    }
+  </script>
+</body>
+
+</html>
