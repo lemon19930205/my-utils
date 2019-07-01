@@ -13,6 +13,11 @@
     padding: 0;
   }
 
+  .box {
+    border: 1px solid #000;
+    box-sizing: border-box;
+  }
+
   .box1 {
     width: 500px;
     height: 100px;
@@ -46,16 +51,30 @@
   .child5 {
     background: purple;
   }
+
+  .left {
+    float: left;
+    width: 100px;
+  }
+
+  .right {
+    float: left;
+    width: calc(100% - 100px);
+    margin-left: -100px;
+  }
 </style>
 
 <body>
-  <div class="box1">
+  <!-- <div class="box1">
     <div class="child1">asdf asdf</div>
     <div class="child2">sdfsdfasdfa</div>
     <div class="child3">adfasdfasdfasdfasdfasdfasdfasdfasdf</div>
     <div class="child4">asdfasdfasdfasdf</div>
     <div class="child5">wetwetertertertertwert</div>
-  </div>
+  </div> -->
+
+  <div class="box left">left</div>
+  <div class="box right">right</div>
   <script>
     //1.用两个数组(栈)实现一个队列
 
@@ -102,9 +121,114 @@
     //5.es6相关
     //5-1. async/await
 
-    //new 操作符都做了些什么
+    //6.new 操作符都做了些什么
     function _new() {
-      let obj = {};
+      //创建一个新对象
+      let target = {};
+      //第一个参数是构造函数
+      let [constructor, ...arg] = [...arguments];
+      //执行[[原型]]连接;target 是 constructor 的实例
+      target.__proto__ = constructor.prototype;
+      //执行构造函数，将属性或方法添加到空对象上
+      let result = constructor.apply(target, arg);
+      if (result && (typeof result === 'object' || typeof result === 'function')) {
+        //如果构造函数执行返回的是一个对象，那么就返回这个对象
+        return result;
+      }
+      //如果构造函数返回的不是一个对象，则返回创建的新对象
+      return target;
+    }
+
+    //7.两列布局
+    //flex/float/position/table/grid
+
+    //8.跨域
+    //同源策略：是浏览器最核心也是最基本的安全功能，如果缺少同源策略，很容易受到XSS/CSFR攻击
+    //同源：协议+域名+端口，三者相同
+    //jsonp跨域/document.domain + iframe/location.hash + iframe/window.name + iframe/postMessage
+    //跨域资源共享(CORS)/nginx代理跨域/node中间件代理跨域/webSocket
+
+    //8-1.jsonp的实现原理
+    //利用script不受同源策略限制的特性,动态创建script，请求一个带参数(回调函数)的网址实现跨域，需要后端配合，只能使用get请求
+
+    //8-2.document.domain + iframe
+    //仅限主域相同，子域不同，通过强制设置document.domain为基础主域，来实现跨域访问(全局变量的) 
+
+    //8-3.location.hash + iframe
+    //不同域只能通过hash传参单向通信，通过iframe的parent/top访问作为中间层域，实现双向通讯
+
+    //8-4.window.name + iframe
+    //通过iframe的src属性由外域转向本地域，跨域数据即由iframe的window.name从外域传递到本地域
+
+    //8-5.postMessage
+    //H5新增，跨页面数据传递
+
+    //8-6.cors跨域资源共享
+    //后端重写请求头，即设置允许访问域名，如果需要携带cookie需要前端设置withCredentials
+    //注：cookie为跨域请求接口所在域的cookie，而非当前页，可用nginx反向代理和node中间件处理
+
+    //8-7.nginx代理
+    //原理：同源策略是浏览器的安全策略，与http无关。服务端调用http接口只是使用http协议，不会执行js脚本，不需要脚本，所以不存在跨域
+    //实现：通过nginx配置一个代理服务器，反向代理访问接口，可以顺便修改cookie,实现跨域登录
+
+    //8-8.node中间件代理
+    //原理：同上，都是通过起一个代理服务器实现数据的转发
+
+    //8-9.webSocket
+    //H5新增，不存在跨域问题，socket.io对api进行了封装，实现了向下兼容
+
+    //9.ajax实现原理 XMLHttpRequest/ActiveXObject(IE)
+
+    //10.react生命周期
+
+    //11.算法
+
+    //12.走楼梯问题，每次走一个台阶或者两个台阶，n个台阶一共有多少种方法(动态规划)
+    //通常给予一个递推公式及一个或多个初始状态。当前子问题的解由上一个子问题的解推出
+    //基本思想：通常子问题都非常相似，试图只解决每个子问题一次，从而减少计算量，相同的计算只进行一次，‘解’进行记忆存储
+    //核心元素：1.最优子结构 2.边界 3.状态转移方程
+    //中心思想：到第10阶楼梯的走法 = 到第9阶楼梯的走法 + 到第8阶楼梯的走法；可以理解为到第十阶的最后一步是1/2步，1步是从第9阶走的，2步是从第8阶走的，所以是两者的走法相加
+    //即：fn(10) = fn(9) + fn(8);
+
+    //12-1.递归求解，时间复杂度O(2^n)
+    function getWays(n) {
+      if (n < 0) return 0;
+      if (n === 1) return 1;
+      if (n === 2) return 2;
+      return getWays(n - 1) + getWays(n - 2);
+    }
+
+    //12-2.备忘录算法,时间复杂度O(n),空间复杂度O(n)
+    const map = new Map();
+
+    function getWays2(n) {
+      if (n < 0) return 0;
+      if (n === 1) return 1;
+      if (n === 2) return 2;
+      if (map.has(n)) {
+        return map.get(n)
+      }
+      const value = getWays2(n - 1) + getWays2(n - 2)
+      map.set(n, value);
+      return value;
+    }
+
+    //12-3.动态规划求解,时间复杂度O(n),空间复杂度O(1)
+    function getWays3(n) {
+      if (n < 0) return 0;
+      if (n === 1) return 1;
+      if (n === 2) return 2;
+
+      //a保存到倒数第二个子状态数据，b保存到倒数第一个子状态数据，temp保存当前状态数据
+      let a = 1,
+        b = 2;
+      let temp = a + b;
+      for (let i = 3; i < n; i++) {
+        temp = a + b;
+        a = b;
+        b = temp;
+      }
+      return temp;
     }
   </script>
 </body>
