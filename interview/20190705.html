@@ -14,14 +14,25 @@
     使用 JavaScript 编写一个函数 once。该函数接受一个函数 fn 作为参数，返回值是一个函数 gn。gn 与 fn 的
     调用方式和执行效果完全相同。唯一不同的时，gn 只有在第一次调用的时候才生效。例如： */
 
+    function initDatabase(config) {
+      console.log('第一次' + config);
+    }
     const init = once(initDatabase);
-    init(config);
-    init(config);
+    init('config1');
+    init('config2');
 
     //只有在第一次调用 init 函数时会执行 initDatabase，参数为 config
     //完成 once 函数。注：不允许声明或使用全局变量
 
-    function once(fn) {}
+    function once(fn) {
+      let flag = 0;
+      return function gn(config) {
+        if (!flag) {
+          fn(config);
+          flag = 1;
+        }
+      }
+    }
 
     /* 2.Promisify
     Node.js 提供的很多异步操作函数都是回调风格的，例如 fs.stat，fs.open 等。回调风格的异步函数有个共
@@ -29,27 +40,59 @@
     种回调风格的写法可能会产生多重函数嵌套的问题。Promise 是解决这个问题的方案。
     编写一个函数 promisify，它接收一个回调风格的异步函数，返回一个Promise风格的异步函数。使用示例： */
 
-    const fs = require("fs");
+    let fs = {
+      stat: function (url, callback) {
+        setTimeout(() => {
+          if (url === '...') {
+            //成功
+            callback('', 'stats1');
+          } else {
+            //失败
+            callback('err', 'stats2');
+          }
+        }, 2000);
+      }
+    }
+    //const fs = require("fs");
     const stat = promisify(fs.stat);
 
     //Callback 风格
-    fs.stat('.', (err, stats) => {
+    fs.stat('...', (err, stats) => {
       if (err) {
         //Handle the error
+        console.log('Callback----------------------------');
+        console.log(err, stats);
+      } else {
+        //Do something with 'stats'
+        console.log('Callback----------------------------');
+        console.log(err, stats);
       }
-      //Do something with 'stats'
     });
 
     //Promise 风格
-    stat('.').then(stats => {
+    stat('...').then(stats => {
       //Do something with 'state'
+      console.log('Promise----------------------------');
+      console.log(stats);
     }).catch(error => {
       //Handle the error
+      console.log('Promise----------------------------');
+      console.log(error);
     })
 
     //完成 promisify 函数
     function promisify(fn) {
-
+      return function (url) {
+        return new Promise(function (resolve, reject) {
+          fn(url, function (err, stats) {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(stats);
+            }
+          })
+        })
+      }
     }
   </script>
 </body>
