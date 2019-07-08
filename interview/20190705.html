@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>20190705</title>
+</head>
+
+<body>
+  <script>
+    /* 1.Once
+    使用 JavaScript 编写一个函数 once。该函数接受一个函数 fn 作为参数，返回值是一个函数 gn。gn 与 fn 的
+    调用方式和执行效果完全相同。唯一不同的时，gn 只有在第一次调用的时候才生效。例如： */
+
+    const init = once(initDatabase);
+    init(config);
+    init(config);
+
+    //只有在第一次调用 init 函数时会执行 initDatabase，参数为 config
+    //完成 once 函数。注：不允许声明或使用全局变量
+
+    function once(fn) {}
+
+    /* 2.Promisify
+    Node.js 提供的很多异步操作函数都是回调风格的，例如 fs.stat，fs.open 等。回调风格的异步函数有个共
+    同的特点是，最后一个参数是回调函数，回调函数的第一个参数是 Error，第二个参数是我们需要的资源。但这
+    种回调风格的写法可能会产生多重函数嵌套的问题。Promise 是解决这个问题的方案。
+    编写一个函数 promisify，它接收一个回调风格的异步函数，返回一个Promise风格的异步函数。使用示例： */
+
+    const fs = require("fs");
+    const stat = promisify(fs.stat);
+
+    //Callback 风格
+    fs.stat('.', (err, stats) => {
+      if (err) {
+        //Handle the error
+      }
+      //Do something with 'stats'
+    });
+
+    //Promise 风格
+    stat('.').then(stats => {
+      //Do something with 'state'
+    }).catch(error => {
+      //Handle the error
+    })
+
+    //完成 promisify 函数
+    function promisify(fn) {
+
+    }
+  </script>
+</body>
+
+</html>
