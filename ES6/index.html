@@ -1,25 +1,66 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>ES6</title>
 </head>
+
 <body>
   <script>
-    function* helloWorldGenerator() {
+    /* function* helloWorldGenerator() {
       yield 'hello';
       yield 'world';
       return 'ending'
     }
     var hw = helloWorldGenerator();
     console.log(hw);
-    
+
     console.log(hw.next());
     console.log(hw.next());
     console.log(hw.next());
-    console.log(hw.next());
+    console.log(hw.next()); */
+
+    /* function timeout(ms) {
+      return new Promise((resolve, reject) => {
+        setTimeout(resolve, ms, 'done');
+      })
+    }
+    timeout(100).then((value) => {
+      console.log(value);
+    }) */
+
+    /* const p1 = new Promise(function (resolve, reject) {
+      setTimeout(() => reject(new Error('fail')), 3000);
+    })
+
+    const p2 = new Promise(function (resolve, reject) {
+      setTimeout(() => resolve(p1), 1000);
+    })
+
+    p2.then(res => console.log('res ' + res)).catch(err => console.log('err ' + err));
+
+    let times = setInterval(() => {
+      console.log(p1, p2);
+    }, 1000);
+    setTimeout(() => {
+        clearInterval(times)
+      }, 5000); */
+
+    const promise = new Promise(function (resolve, reject) {
+      resolve('ok');
+      setTimeout(() => {
+        throw new Error('test')
+      }, 0);
+    });
+    promise.then(function (value) {
+      console.log(value);
+    }).catch(function (err) {
+      console.log(err);
+    })
   </script>
 </body>
+
 </html>
