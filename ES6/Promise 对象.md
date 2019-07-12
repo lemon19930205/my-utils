@@ -1,4 +1,4 @@
-# Promise
+# Promise 对象
 
 ## 遇到的奇怪问题
 
