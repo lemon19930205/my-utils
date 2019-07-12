@@ -440,3 +440,124 @@ new Promise((resolve, reject) => {
     //4.1 1 2 4.2 2.1 4.3 3
     ```
 
+## 9.Promise.reject()
+
+- 返回一个新的 Promise 实例，状态为 rejected
+
+- 与 resolve() 不同的是,rejected() 会原封不动的将参数传入后续方法中
+
+  ```js
+  let thenable = {
+    then:function(resolve,reject){
+      reject('出错了')
+    }
+  };
+
+  Promise.reject(thenable).catch(e => {
+    console.log(e === thenable);
+    //true
+  });
+  ```
+
+## 10.应用
+
+- 加载图片，一旦加载完成 Promise 的状态就改变
+
+- Generator 与 Promise 结合，用 Generator 函数管理流程，遇到异步操作则返回一个 Promise 对象。在函数 run 中处理 Promise 对象，并调用 next 方法。
+
+  ```js
+  function getFoo() {
+    return new Promise(function (resolve, reject) {
+      resolve('foo');
+      //reject('报错了');
+    });
+  }
+
+  const g = function* () {
+    try {
+      const foo = yield getFoo();
+      console.log(foo);
+      const foo1 = yield '777';
+    } catch (e) {
+      console.log(e);
+    }
+  };
+
+  function run(generator) {
+    const it = generator();
+
+    function go(result) {
+      if (result.done) return result.value;
+
+      return result.value.then((value) => {
+        return go(it.next(value));
+      }).catch((err) => {
+        return go(it.throw(err))
+      });
+    }
+
+    go(it.next());
+  }
+
+  run(g);
+  ```
+
+## 11.Promise.try()
+
+- 提案阶段，在 Promise 库 Bluebird\Q 和 when 中早就提供这个方法了
+
+- 不管是同步还是异步函数都想用 Promise 来处理，这样不管是同步还是异步函数，都可以用 then 指向下一步流程，用 catch 处理抛出的错误
+
+- 期望达到，用 Promise 处理同步函数同步执行，异步函数异步执行
+
+  ```js
+  const f = () => console.log('now');
+
+  //Promise.resolve().then(f);
+  //next
+  //now
+
+  //(async () => f())().then().catch();
+  //now
+  //next
+
+  (
+    () => new Promise(
+      resolve => resolve(f())
+    )
+  )();
+  //now
+  //next
+
+  console.log('next');
+  ```
+
+- 可用 Promise.try 方法代替(提案阶段，不可用！)
+
+  ```js
+  const f = () => console.log('now');
+  Promise.try(f);
+  console.log('next');
+  //now
+  //next
+  ```
+
+- 提供统一处理机制，可以用 then 方法管理流程，用 catch 方法捕获异常(包括同步和异步的异常)
+
+  ```js
+  database.users.get({id:userId}).then(...).catch(...);
+  //只能捕获异步的异常
+
+  try {
+    database.users.get({id:userId}).then(...).catch(...);
+  } catch (e) {
+    //...
+  }
+  //同步和异步异常都能捕获，但是比较繁琐，需要分开处理
+
+  Promise.try(() => database.users.get({id:userId}))
+  .then(...).catch(...)
+  //同/异步异常都在 catch 中捕获，完美
+  ```
+
+- Promise.try 实际上就像是模拟 try 代码块，promise.catch 模拟的是 catch 代码块

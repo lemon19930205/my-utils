@@ -109,25 +109,85 @@
     console.log(1);
     //4.1 1 2 4.2 2.1 4.3 3 */
 
-    setInterval(() => {
-      
+    /* setInterval(() => {
+
     }, 10);
     setInterval(() => {
-      
+
     }, 10);
 
     new Promise((resolve, reject) => {
       resolve(setTimeout(() => {
-        
+
       }, 0))
     }).then((res) => {
       console.log(res)
       return setTimeout(() => {
-  
+
       }, 0);
     }).then((value) => {
       console.log(value);
-    });
+    }); */
+
+    /* function getFoo() {
+      return new Promise(function (resolve, reject) {
+        resolve('foo');
+        //reject('报错了');
+      });
+    }
+
+    const g = function* () {
+      try {
+        const foo = yield getFoo();
+        console.log(foo);
+        const foo1 = yield '777';
+      } catch (e) {
+        console.log(e);
+      }
+    };
+
+    function run(generator) {
+      const it = generator();
+
+      function go(result) {
+        if (result.done) return result.value;
+
+        return result.value.then((value) => {
+          return go(it.next(value));
+        }).catch((err) => {
+          return go(it.throw(err))
+        });
+      }
+
+      go(it.next());
+    }
+
+    run(g); */
+
+    //Promise.try();
+
+    const f = () => console.log('now');
+
+    //Promise.resolve().then(f);
+    //next
+    //now
+
+    //(async () => f())().then().catch();
+    //now
+    //next
+
+    (
+      () => new Promise(
+        resolve => resolve(f())
+      )
+    )();
+    //now
+    //next
+
+    console.log('next');
+    
+
+
   </script>
 </body>
 
