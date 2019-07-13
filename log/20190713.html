@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>20190713</title>
+</head>
+
+<body>
+  <script>
+    //来源：echarts来确定提示框的位置
+    //高级前端代码？'+'会对 boolean 进行类型转换，false -> 0，true -> 1
+    var option = {
+      position: function (pos, params, el, elRect, size) {
+        var obj = {
+          top: 10
+        };
+        obj[['left', 'right'][+(pos[0] < size.viewSize[0] / 2)]] = 30;
+        return obj;
+      }
+    }
+
+    //增加一定的可读性
+    var option2 = {
+      position: function (pos, params, el, elRect, size) {
+        var obj = {
+          top: 10
+        };
+        obj[(pos[0] < size.viewSize[0] / 2) ? 'right' : 'left'] = 30;
+        return obj;
+      }
+    }
+
+    //再简单一点
+    var option2 = {
+      position: function (pos, params, el, elRect, size) {
+        return {
+          top: 10,
+          [(pos[0] < size.viewSize[0] / 2) ? 'right' : 'left']: 30
+        };
+      }
+    }
+
+    /* mobile端常见的适配方案：
+    1.rem
+    2.flex
+    3.百分比
+    4.vw\vh\vmin\vmax 
+    5.media媒体查询
+    6.px
+    通常结合使用，比较完善的有网易方案和手淘方案
+     */
+
+     /* 
+     vw: 1vw = 屏幕宽度的1%，如果屏幕宽度是750，则 1vw = 7.5px
+     vh: 1vh = 屏幕高度的1%
+     vmin: 1vmin = 屏幕高度和宽度的1%中最小值
+     vmax: 1vmax = 屏幕高度和宽度的1%中最大值
+      */
+
+    /* 刘海屏解决：
+    meta标签：viewport-fit = cover
+     */
+  </script>
+</body>
+
+</html>
