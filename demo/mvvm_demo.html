@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>mvvm</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="/modules/bootstrap-3.3.7/dist/css/bootstrap.css">
+  <style type="text/css">
+
+  </style>
+</head>
+
+<body>
+  <div class="form" id="form">
+    <div class="row">
+      <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+        <div class="input-group">
+          <div class="input-group-addon">姓名</div>
+          <input type="text" class="form-control" name="name">
+        </div>
+      </div>
+      <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+        <div class="input-group">
+          <div class="input-group-addon">年龄</div>
+          <input type="text" class="form-control" name="age">
+        </div>
+      </div>
+      <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+        <div class="input-group">
+          <div class="input-group-addon">电话</div>
+          <input type="text" class="form-control" name="number">
+        </div>
+      </div>
+      <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+        <div class="input-group">
+          <div class="input-group-addon">邮箱</div>
+          <input type="text" class="form-control" name="mail">
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+        <div class="input-group">
+          <div class="input-group-addon">民族</div>
+          <input type="text" class="form-control" name="nation">
+        </div>
+      </div>
+      <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+        <div class="input-group">
+          <div class="input-group-addon">住址</div>
+          <input type="text" class="form-control" name="address">
+        </div>
+      </div>
+      <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+        <div class="input-group">
+          <div class="input-group-addon">注册日期</div>
+          <input type="text" class="form-control" name="loginDate">
+        </div>
+      </div>
+      <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+        <div class="input-group">
+          <div class="input-group-addon">备注</div>
+          <input type="text" class="form-control" name="remark">
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="../modules/jquery-3.2.1.min.js"></script>
+  <script>
+    //在jq项目中实现双向数据绑定
+    /* 
+    1.基于 Proxy/Object.defineProperty/change 事件 三种方式，兼容实现
+    2.增加包括 参数类型/默认值/模块显隐等 功能型配置
+    3.可手动控制是否同步
+     */
+    $.fn.extend({
+      initMVVM: function (option) {
+        let defaultObj = {},
+          $this = this,
+          $inputs = $this.find("input[name]");
+        Object.values($inputs).forEach(item => {
+          let objKey = $(item).attr('name');
+          objKey && (defaultObj[objKey] = $inputs.val());
+        });
+
+        let handler = {
+          get: function (obj, prop) {
+            return obj[prop];
+          },
+          set: function (obj, prop, val, proxy) {
+            //判断是否为内部事件修改
+            if (prop[0] === "_"){
+              obj[prop.slice(1)] = val;
+            }else{
+              obj[prop] !== val && $this.find("input[name=" + prop + "]").val(val);
+            }
+            return true;
+          }
+        };
+
+        let proxyObj = new Proxy(defaultObj, handler);
+
+        //输入框事件
+        $inputs.on("input", function (e) {
+          let $this = $(this);
+          proxyObj["_" + $this.attr('name')] = $this.val();
+        });
+
+        return proxyObj;
+      }
+    });
+
+    let formData = $("#form").initMVVM({
+      a: 4444
+    });
+    //console.log('666666', formData);
+
+    /* function fn(num) {
+      let a = {
+        num: num
+      };
+      $("input").on("input", function (e) {
+        a.num++;
+      })
+      return a;
+    }
+    let b = fn(1);
+    console.log(b); */
+  </script>
+</body>
+
+</html>
