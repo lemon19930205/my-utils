@@ -81,7 +81,7 @@
         let defaultObj = {},
           $this = this,
           $inputs = $this.find("input[name]");
-        Object.values($inputs).forEach(item => {
+        [...$inputs].forEach(item => {
           let objKey = $(item).attr('name');
           objKey && (defaultObj[objKey] = $inputs.val());
         });
@@ -92,10 +92,13 @@
           },
           set: function (obj, prop, val, proxy) {
             //判断是否为内部事件修改
-            if (prop[0] === "_"){
+            if (prop[0] === "_") {
               obj[prop.slice(1)] = val;
-            }else{
-              obj[prop] !== val && $this.find("input[name=" + prop + "]").val(val);
+            } else {
+              if (obj[prop] !== val) {
+                obj[prop] = val;
+                $this.find("input[name=" + prop + "]").val(val);
+              }
             }
             return true;
           }
@@ -106,7 +109,8 @@
         //输入框事件
         $inputs.on("input", function (e) {
           let $this = $(this);
-          proxyObj["_" + $this.attr('name')] = $this.val();
+          //proxyObj["_" + $this.attr('name')] = $this.val();
+          proxyObj[$this.attr('name')] = $this.val();
         });
 
         return proxyObj;
