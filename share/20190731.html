@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>20190731</title>
+</head>
+
+<body>
+  <script>
+    /* $("th[row-describedby='priceSort'] .questa").mouseover(function (e) {
+      $("body").append("<div id='div_toop'><div id='inner'>子公司最后一次购进价格在全国的排名，由低到高</div></div>");
+      $("#div_toop")
+        .css({
+          "top": (e.pageY - 45) + "px",
+          "position": "absolute",
+          "left": (e.pageX - 305) + "px"
+        }).show("fast");
+    }).mouseout(function () {
+      $("#div_toop").remove();
+    }).mousemove(function (e) {});
+
+    $("th[row-describedby='lastPrice'] .questa").mouseover(function (e) {
+      $("body").append("<div id='div_toop'><div id='inner'>子公司最后一次购进价格，取最后一次采购入库单中的含税单价</div></div>");
+      $("#div_toop")
+        .css({
+          "top": (e.pageY - 45) + "px",
+          "position": "absolute",
+          "left": (e.pageX - 190) + "px"
+        }).show("fast");
+    }).mouseout(function () {
+      $("#div_toop").remove();
+    }).mousemove(function (e) {});
+
+    // 含税成本价
+    $("th[row-describedby='taxCost'] .questa").mouseover(function (e) {
+      $("body").append("<div id='div_toop'><div id='inner'>取商品总库存中的含税成本单价</div></div>");
+      $("#div_toop")
+        .css({
+          "top": (e.pageY - 44) + "px",
+          "position": "absolute",
+          "left": (e.pageX - 150) + "px"
+        }).show("fast");
+    }).mouseout(function () {
+      $("#div_toop").remove();
+    }).mousemove(function (e) {});
+
+    // APP售价
+    $("th[row-describedby='appPrice'] .questa").mouseover(function (e) {
+      $("body").append("<div id='div_toop'><div id='inner'>取神农机构商品中的APP售价</div></div>");
+      $("#div_toop")
+        .css({
+          "top": (e.pageY - 44) + "px",
+          "position": "absolute",
+          "left": (e.pageX - 150) + "px"
+        }).show("fast");
+    }).mouseout(function () {
+      $("#div_toop").remove();
+    }).mousemove(function (e) {});
+
+    // APP售价排名
+    $("th[row-describedby='appPriceSort'] .questa").mouseover(function (e) {
+      $("body").append("<div id='div_toop'><div id='inner'>神农机构商品中的APP售价在全国的排名，排名由高到低</div></div>");
+      $("#div_toop")
+        .css({
+          "top": (e.pageY - 44) + "px",
+          "position": "absolute",
+          "left": (e.pageX - 190) + "px"
+        }).show("fast");
+    }).mouseout(function () {
+      $("#div_toop").remove();
+    }).mousemove(function (e) {});
+
+    // 30天销量
+    $("th[row-describedby='productThirtySale'] .questa").mouseover(function (e) {
+      $("body").append("<div id='div_toop'><div id='inner'>采购员个人的销售数量，从计划信息表取数，排名由高到低</div></div>");
+      $("#div_toop")
+        .css({
+          "top": (e.pageY - 44) + "px",
+          "position": "absolute",
+          "left": (e.pageX - 190) + "px"
+        }).show("fast");
+    }).mouseout(function () {
+      $("#div_toop").remove();
+    }).mousemove(function (e) {});
+
+    //30天销量排名
+    $("th[row-describedby='productThirtySaleSort'] .questa").mouseover(function (e) {
+      $("body").append("<div id='div_toop'><div id='inner'>采购员自己的当月销量在全国的排名</div></div>");
+      $("#div_toop")
+        .css({
+          "top": (e.pageY - 44) + "px",
+          "position": "absolute",
+          "left": (e.pageX - 190) + "px"
+        }).show("fast");
+    }).mouseout(function () {
+      $("#div_toop").remove();
+    }).mousemove(function (e) {});
+
+    // 全国最低价
+    $("th[row-describedby='globalLowestPrice'] .questa").mouseover(function (e) {
+      $("body").append("<div id='div_toop'><div id='inner'>最后一次采购价中取全国最低价</div></div>");
+      $("#div_toop")
+        .css({
+          "top": (e.pageY - 44) + "px",
+          "position": "absolute",
+          "left": (e.pageX - 190) + "px"
+        }).show("fast");
+    }).mouseout(function () {
+      $("#div_toop").remove();
+    }).mousemove(function (e) {});
+
+    // 全国最低价所属机构
+    $("th[row-describedby='globalLowestPriceOrg'] .questa").mouseover(function (e) {
+      $("body").append("<div id='div_toop'><div id='inner'>最后一次采购价所属子公司</div></div>");
+      $("#div_toop")
+        .css({
+          "top": (e.pageY - 44) + "px",
+          "position": "absolute",
+          "left": (e.pageX - 190) + "px"
+        }).show("fast");
+    }).mouseout(function () {
+      $("#div_toop").remove();
+    }).mousemove(function (e) {}); */
+
+    var questaOption = [{
+        name: 'priceSort',
+        content: '子公司最后一次购进价格在全国的排名，由低到高',
+        left: '305'
+      },
+      {
+        name: 'lastPrice',
+        content: '子公司最后一次购进价格，取最后一次采购入库单中的含税单价'
+      },
+      {
+        name: 'taxCost',
+        content: '取商品总库存中的含税成本单价',
+        left: '150'
+      },
+      {
+        name: 'appPrice',
+        content: '取神农机构商品中的APP售价',
+        left: '150'
+      },
+      {
+        name: 'appPriceSort',
+        content: '神农机构商品中的APP售价在全国的排名，排名由高到低'
+      },
+      {
+        name: 'productThirtySale',
+        content: '采购员个人的销售数量，从计划信息表取数，排名由高到低'
+      },
+      {
+        name: 'productThirtySaleSort',
+        content: '神农机构商品中的APP售价在全国的排名，排名由高到低'
+      },
+      {
+        name: 'productThirtySale',
+        content: '采购员自己的当月销量在全国的排名'
+      },
+      {
+        name: 'globalLowestPrice',
+        content: '最后一次采购价中取全国最低价'
+      },
+      {
+        name: 'globalLowestPriceOrg',
+        content: '最后一次采购价所属子公司'
+      }
+    ];
+    $("body").on({
+      mouseover: function (e) {
+        var item = questaOption.find(function (item) {
+          return item.name === $(e.target).parent('th').attr('row-describedby');
+        });
+        $("body").append("<div id='div_toop'><div id='inner'>" + item.content + "</div></div>");
+        $("#div_toop")
+          .css({
+            "top": (e.pageY - 44) + "px",
+            "position": "absolute",
+            "left": (e.pageX - (item.left || 190)) + "px"
+          }).show("fast");
+      },
+      mouseout: function () {
+        $("#div_toop").remove();
+      }
+    }, questaOption.map(function (item) {
+      return "th[row-describedby='" + item.name + "'] .questa"
+    }).join(','));
+    
+  </script>
+</body>
+
+</html>
