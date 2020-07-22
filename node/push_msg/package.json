@@ -14,10 +14,6 @@
   },
   "author": "laozhou",
   "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/lemon19930205/push_msg/issues"
-  },
-  "homepage": "https://github.com/lemon19930205/push_msg#readme",
   "dependencies": {
     "express": "^4.16.3",
     "mysql": "^2.15.0",
