@@ -16,30 +16,8 @@ export default {
         path: '/Tree/index'
       },
       {
-        title: '销售管理',
-        path: '/market',
-        icon: 'el-icon-goods',
-        list: [
-          {
-            title: '销售订单',
-            path: '/market/order',
-            add: '/market/orderAdd'
-          },
-          {
-            title: '销售出库单',
-            path: '/market/outBound'
-          },
-          {
-            title: '销售综合查询',
-            path: '/market/integratedQuery',
-            list: [
-              {
-                title: '销售订单报表',
-                path: '/market/orderStatement'
-              }
-            ]
-          }
-        ]
+        title: '代码片段展示',
+        path: '/Code/index'
       }
     ];
 

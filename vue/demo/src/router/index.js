@@ -6,7 +6,7 @@ Vue.use(Router);
 import Layout from '@/views/Layout';
 
 //各模块路由
-import marketRouter from './pages/market';
+//import marketRouter from './pages/market';
 
 export const defaultRouter = [
   {
@@ -50,7 +50,18 @@ export const defaultRouter = [
       }
     ]
   },
-  marketRouter
+  {
+    name: 'Code',
+    path: '/Code',
+    component: Layout,
+    children: [
+      {
+        name: 'index',
+        path: 'index',
+        component: () => import('@/views/Code')
+      }
+    ]
+  }
 ];
 
 export default new Router({
