@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <!-- 引入 ECharts 文件 -->
+    <script src="./echarts.js"></script>
+  </head>
+  <body>
+    <!-- 为 ECharts 准备一个具备大小（宽高）的 DOM -->
+    <div id="main" style="width: 500px; height: 900px;"></div>
+    <script type="text/javascript">
+      // 基于准备好的dom，初始化echarts实例
+      var myChart = echarts.init(document.getElementById('main'))
+
+      // 指定图表的配置项和数据
+      const data = []
+
+      for (let i = 1; i <= 47; i++) {
+        data.push({
+          name: i < 10 ? '0' + i : i,
+          value: 1,
+          itemStyle: {
+            color: '#222',
+          },
+        })
+      }
+      console.log(data)
+
+      const option = {
+        title: {
+          text: 'Disk Usage',
+          left: 'center',
+        },
+
+        /* tooltip: {
+          formatter: function (info) {
+            var value = info.value
+            var treePathInfo = info.treePathInfo
+            var treePath = []
+
+            for (var i = 1; i < treePathInfo.length; i++) {
+              treePath.push(treePathInfo[i].name)
+            }
+
+            return [
+              '<div class="tooltip-title">' +
+                formatUtil.encodeHTML(treePath.join('/')) +
+                '</div>',
+              'Disk Usage: ' + formatUtil.addCommas(value) + ' KB',
+            ].join('')
+          },
+        }, */
+
+        series: [
+          {
+            name: 'option',
+            type: 'treemap',
+            height: '800',
+            width: '400',
+            squareRatio: 6,
+            levels: [
+              {
+                itemStyle: {
+                  borderColor: '#555',
+                  borderWidth: 4,
+                  gapWidth: 4,
+                },
+              },
+            ],
+            data: data,
+          },
+        ],
+      }
+
+      // 使用刚指定的配置项和数据显示图表。
+      myChart.setOption(option)
+    </script>
+  </body>
+</html>
