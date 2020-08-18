@@ -9,7 +9,7 @@
   </head>
   <body>
     <!-- 为 ECharts 准备一个具备大小（宽高）的 DOM -->
-    <div id="main" style="width: 500px; height: 900px;"></div>
+    <!-- <div id="main" style="width: 500px; height: 900px;"></div>
     <script type="text/javascript">
       // 基于准备好的dom，初始化echarts实例
       var myChart = echarts.init(document.getElementById('main'))
@@ -98,6 +98,21 @@
 
       // 使用刚指定的配置项和数据显示图表。
       myChart.setOption(option)
+    </script> -->
+    <canvas id="canvas" width="400" height="800"></canvas>
+    <script type="text/javascript">
+      var canvas = document.getElementById('canvas')
+      var ctx = canvas.getContext('2d')
+      ctx.fillStyle = '#666'
+      ctx.fillRect(0, 0, 400, 800)
+
+      ctx.font = '20px sans-serif'
+      for (let i = 1; i <= 15; i++) {
+        ctx.fillStyle = '#fff'
+        ctx.fillRect(20, (i - 1) * (10 + 40) + 20, 360, 40)
+        ctx.fillStyle = '#000'
+        ctx.fillText(i < 10 ? '0' + i : i, 190, (i - 1) * (10 + 40) + 20 + 30)
+      }
     </script>
   </body>
 </html>
