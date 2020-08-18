@@ -17,10 +17,10 @@
       // 指定图表的配置项和数据
       const data = []
 
-      for (let i = 1; i <= 47; i++) {
+      for (let i = 1; i <= 10; i++) {
         data.push({
           name: i < 10 ? '0' + i : i,
-          value: 1,
+          value: 100,
           itemStyle: {
             color: '#222',
           },
@@ -52,14 +52,29 @@
             ].join('')
           },
         }, */
-
+        calculable: false,
+        visualMap: [
+          {
+            type: 'continuous', //连续型
+            //dimension: 2, //对应的数组维度
+            itemWidth: 400,
+            itemHeight: 10,
+            show: false, //颜色范围选择的小工具不显示
+            /* min: Math.min(...arr),
+            max: Math.max(...arr), //数组最大、最小值设定为颜色范围 */
+            color: [
+              'rgb(31, 66, 90)',
+              'rgb(108, 144, 166)',
+              'rgb(250, 250, 250)',
+            ], //颜色过渡，可自选
+          },
+        ],
         series: [
           {
             name: 'option',
             type: 'treemap',
             height: '800',
-            width: '400',
-            squareRatio: 6,
+            width: '200',
             levels: [
               {
                 itemStyle: {
@@ -69,6 +84,13 @@
                 },
               },
             ],
+            squareRatio: 5, //期望矩形长宽比率
+            roam: false, //是否开启拖拽漫游
+            nodeClick: false, //点击节点后的行为
+            breadcrumb: {
+              //关闭面包屑路径
+              show: false,
+            },
             data: data,
           },
         ],
