@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script type="text/javascript">
+      var utils = function (params) {
+        this.format = function () {
+          var times = new Date()
+          var y = times.getFullYear(),
+            m = times.getMonth() + 1,
+            d = times.getDate(),
+            H = times.getHours(),
+            M = times.getMinutes(),
+            S = times.getSeconds()
+          return `${y}/${m}/${d} ${H}:${M}:${S}`
+        }
+      }
+      var myUtils = new utils()
+      console.log(myUtils.format())
+    </script>
+  </body>
+</html>
